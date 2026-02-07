@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Walentynka?</title>
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    .photo {
+      width: 260px;
+      max-width: 90%;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    button {
+      font-size: 1.4em;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background-color: white;
+      color: #ff4d6d;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="content">
+    <h1>Wiolciu, czy zostaniesz moją walentynką? 💘</h1>
+
+    <img src="zdjecie.png" alt="Nasze zdjęcie" class="photo">
+
+    <div class="buttons">
+      <button id="yes">TAK ❤️</button>
+      <button id="no">NIE 💔</button>
+    </div>
+  </div>
+
+  <!-- AUDIO ZOSTAJE W DOM -->
+  <audio id="music" src="muzyka.mp3" loop></audio>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const content = document.getElementById("content");
+    const music = document.getElementById("music");
+
+    const noTexts = [
+      "Wiolciaaa... 😅",
+      "Po co tutaj klikasz???? 🤔",
+      "Ej nooo Wiolciaaaa 🥺",
+      "Serioooo? 😳",
+      "Dobra, nie ma opcji 😏"
+    ];
+
+    let noClicks = 0;
+
+    noBtn.addEventListener("click", () => {
+      if (noClicks < noTexts.length) {
+        noBtn.textContent = noTexts[noClicks];
+        noClicks++;
+      } else {
+        noBtn.style.display = "none";
+      }
+    });
+
+    document.getElementById("yes").addEventListener("click", () => {
+      music.play(); // <-- DZIAŁA NA TELEFONIE
+
+      content.innerHTML = `
+        <h1>Wiedziałem! ❤️🥰</h1>
+        <p style="font-size:1.4em;color:white;">
+          Jesteś moją idealną walentynką.
+        </p>
+        <p style="font-size:1.4em;color:white;">
+          Będzie super.
+        </p>
+        <p style="font-size:1.4em;color:white;">
+          Bo z Tobą.
+        </p>
+      `;
+    });
+  </script>
+
+</body>
+</html>
